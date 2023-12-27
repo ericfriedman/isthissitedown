@@ -63,8 +63,20 @@
         }
 
         function checkWebsiteStatus(url) {
-            // Placeholder: Functionality to be implemented in serverless function
-            // Update this function to make a request to your serverless API
+            function checkWebsiteStatus(url) {
+    fetch('/api/check-site', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: url }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        updateResult(`"${url}" is ${data.status}`, data.isUp);
+    });
+}
+
             console.log('Checking website status for:', url);
             // Simulated result
             setTimeout(() => updateResult(`"${url}" is up`, true), 2000);
